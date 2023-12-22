@@ -51,11 +51,11 @@
   align-items: center;
 }
 
-.book-list .star-icon {
-  width: 24px;
-  height: 24px;
+.book-list .heart-icon {
+  width: 26px;
+  height: 26px;
   margin: 0 20px;
   cursor: pointer;
   transition: color 0.3s ease;
-  color: #fca510;
+  color: #bb83ff;
 }

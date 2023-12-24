@@ -14,7 +14,7 @@ const BookForm = () => {
   const handleAddRandomBook = () => {
     const randomIndex = Math.floor(Math.random() * booksData.length);
     const randomBook = booksData[randomIndex];
-    dispatch(addBook(createBookWithId(randomBook)));
+    dispatch(addBook(createBookWithId(randomBook, 'random')));
   };
 
   const handleSubmit = (e) => {
@@ -23,7 +23,7 @@ const BookForm = () => {
     if (title && author) {
       //dispatch action
 
-      dispatch(addBook(createBookWithId({ title, author })));
+      dispatch(addBook(createBookWithId({ title, author }, 'manual')));
 
       setTitle('');
       setAuthor(''); // вызов этих двух функции с пустыми строками нужны для того чтобы после ввода данных в инпуты, инпуты очищались и были готовы к новы вводам данных.
@@ -34,7 +34,7 @@ const BookForm = () => {
     try {
       const res = await axios.get('http://localhost:4000/random-book');
       if (res?.data?.title && res?.data?.author) {
-        dispatch(addBook(createBookWithId(res.data)));
+        dispatch(addBook(createBookWithId(res.data, 'API')));
       }
     } catch (error) {
       console.log('Error fetching random book', error);

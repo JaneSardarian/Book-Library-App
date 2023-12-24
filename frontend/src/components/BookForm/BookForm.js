@@ -1,14 +1,14 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import axios from 'axios';
-import { addBook } from '../../redux/slices/booksSlice';
+
+import { addBook, thunkFunction } from '../../redux/slices/booksSlice';
 import createBookWithId from '../../utils/createBookWithId';
 import booksData from '../../data/books.json';
 import './BookForm.css';
 const BookForm = () => {
   const [title, setTitle] = useState('');
   const [author, setAuthor] = useState('');
-  // const [formData, setFormData] = useState({}) - если много инпутов
+
   const dispatch = useDispatch();
 
   const handleAddRandomBook = () => {
@@ -18,27 +18,18 @@ const BookForm = () => {
   };
 
   const handleSubmit = (e) => {
-    e.preventDefault(); //это чтобы на новую страницу не перенаправлял браузер
+    e.preventDefault();
 
     if (title && author) {
-      //dispatch action
-
       dispatch(addBook(createBookWithId({ title, author }, 'manual')));
 
       setTitle('');
-      setAuthor(''); // вызов этих двух функции с пустыми строками нужны для того чтобы после ввода данных в инпуты, инпуты очищались и были готовы к новы вводам данных.
+      setAuthor('');
     }
   };
 
-  const handleAddRandomBookViaAPI = async () => {
-    try {
-      const res = await axios.get('http://localhost:4000/random-book');
-      if (res?.data?.title && res?.data?.author) {
-        dispatch(addBook(createBookWithId(res.data, 'API')));
-      }
-    } catch (error) {
-      console.log('Error fetching random book', error);
-    }
+  const handleAddRandomBookViaAPI = () => {
+    dispatch(thunkFunction);
   };
 
   return (

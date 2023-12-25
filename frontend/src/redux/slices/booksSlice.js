@@ -36,7 +36,7 @@ const booksSlice = createSlice({
       });
     },
   },
-  //option 1
+  //option 1 у меня не работает
   // extraReducers: {
   //   [fetchBook.fulfilled]: (state, action) => {
   //     if (action.payload.title && action.payload.author) {
